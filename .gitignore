@@ -20,6 +20,9 @@ mono_crash.*
 # VS Code files
 .vscode/
 
+# Visual Studio files
+.vs/
+
 # Build directories
 build/
 [Bb]uild/
