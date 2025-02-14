@@ -31,6 +31,8 @@ app.MapGet("/weatherforecast", () =>
     })
     .WithName("GetWeatherForecast");
 
+app.MapGet("test", () => Results.Ok());
+
 await app.RunAsync();
 
 internal sealed record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
