@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Detect OS
+OS=$(uname -s 2>/dev/null || echo "Windows")
+
+case "$OS" in
+    Linux|Darwin)
+        echo "Running Bash pre-commit hook..."
+        exec "$PWD/.git/hooks/pre-push.sh"
+        ;;
+    Windows|MINGW*|CYGWIN*|MSYS*)
+        echo "Running PowerShell pre-commit hook..."
+        exec powershell -File "$PWD/.git/hooks/pre-push.ps1"
+        ;;
+    *)
+        echo "Unknown OS: $OS"
+        exit 1
+        ;;
+esac
