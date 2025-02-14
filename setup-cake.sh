@@ -19,3 +19,5 @@ fi
 dotnet cake "$@"
 if [ $? -ne 0 ]; then exit $?
 fi
+
+cd "$(dirname "$0")"

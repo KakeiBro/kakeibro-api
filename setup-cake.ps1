@@ -11,3 +11,5 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 dotnet cake @args
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+Set-Location -LiteralPath $PSScriptRoot

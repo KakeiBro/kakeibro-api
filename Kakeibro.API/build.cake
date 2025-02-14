@@ -45,7 +45,7 @@ Task("CopyGitHooks")
     CreateDirectory(destinationPath);
 
     // Copy all content from source to destination
-    CopyFiles($"{sourcePath}/**", destinationPath);
+    CopyFiles($"{sourcePath}/*", destinationPath);
 });
 
 //////////////////////////////////////////////////////////////////////
