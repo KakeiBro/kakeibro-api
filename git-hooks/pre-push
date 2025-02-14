@@ -5,11 +5,11 @@ OS=$(uname -s 2>/dev/null || echo "Windows")
 
 case "$OS" in
     Linux|Darwin)
-        echo "Running Bash pre-commit hook..."
+        echo "Running Bash pre-push hook..."
         exec "$PWD/.git/hooks/pre-push.sh"
         ;;
     Windows|MINGW*|CYGWIN*|MSYS*)
-        echo "Running PowerShell pre-commit hook..."
+        echo "Running PowerShell pre-push hook..."
         exec powershell -File "$PWD/.git/hooks/pre-push.ps1"
         ;;
     *)
