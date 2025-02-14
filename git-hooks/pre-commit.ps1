@@ -13,7 +13,7 @@ dotnet test
 if ($LASTEXITCODE -ne 0) { exit 1 }
 
 Write-Host "Running .NET outdated package check..."
-dotnet test
+dotnet list package --outdated
 if ($LASTEXITCODE -ne 0) { exit 1 }
 
 Write-Host "Pre-commit checks passed!"
