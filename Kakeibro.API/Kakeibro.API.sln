@@ -13,6 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{BDA60891-0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KakeiBro.API", "src\KakeiBro.API\KakeiBro.API.csproj", "{72C4AE2B-55F3-4E68-824F-3768FABC0BF1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{967D580B-5482-4829-AED4-140562F2A3B9}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\pull-request.yml = ..\.github\workflows\pull-request.yml
+		..\.github\workflows\master-push.yml = ..\.github\workflows\master-push.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +26,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{72C4AE2B-55F3-4E68-824F-3768FABC0BF1} = {CE207E1E-9D12-4D73-BE18-BDC2B05E50CF}
+		{967D580B-5482-4829-AED4-140562F2A3B9} = {E9478A3B-3C6C-4457-B89F-234CCD2C6B03}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{72C4AE2B-55F3-4E68-824F-3768FABC0BF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

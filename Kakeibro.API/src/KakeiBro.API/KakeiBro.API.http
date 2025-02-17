@@ -1,6 +1,12 @@
-@KakeiBro.API_HostAddress = http://localhost:5214
+@KakeiBro_API_HostAddress = http://localhost:5214
+@KakeiBro_API_DEMO_HostAddress = https://kakeibro-api.dsbalderrama.top
 
-GET {{KakeiBro.API_HostAddress}}/weatherforecast/
+GET {{KakeiBro_API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{KakeiBro_API_DEMO_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
