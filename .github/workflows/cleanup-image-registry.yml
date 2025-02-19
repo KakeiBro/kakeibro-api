@@ -29,7 +29,7 @@ jobs:
       - name: Run custom script
         env:
           SERVICE_NAME: 'kakeibro-api' # Cloud Run service name
-          REGION: 'us-central1' # Cloud Run region (e.g., us-central1)
+          REGION: 'us-east1' # Cloud Run region (e.g., us-central1), our images are at us-east1
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
           REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
           IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
