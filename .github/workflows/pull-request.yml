@@ -1,0 +1,55 @@
+name: Master Pull Request CI/CD
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  DOTNET_VERSION: '9.0.x'
+  SERVICE_NAME: 'kakeibro-api' # Cloud Run service name
+  REGION: 'us-east1' # Cloud Run region (e.g., us-central1)
+  CACHE_VERSION: v1 # Change this to bust cache when needed
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Cache .NET dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ env.CACHE_VERSION }}-${{ hashFiles('**/packages.lock.json', '**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-${{ env.CACHE_VERSION }}-
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Check format
+        run: dotnet format --verify-no-changes
+
+      - name: Build the project
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build --verbosity normal
+
+      - name: Run outdated package check
+        run: dotnet list package --outdated
+        
+        #      - name: Run dotnet migrations check
+        #        run: dotnet ef migrations list
+
+      - name: Run vulnerabilities check
+        run: dotnet list package --vulnerable
