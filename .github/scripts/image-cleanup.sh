@@ -18,8 +18,7 @@ TAGS=$(gcloud artifacts tags list \
   --location=$REGION \
   --repository=$REPOSITORY_NAME \
   --package=$IMAGE_NAME \
-  --format="value(name)" \
-  --sort-by=~create_time)
+  --format="value(name)" | tac)
 
 # Convert the list of tags into an array
 TAGS_ARRAY=($TAGS)
