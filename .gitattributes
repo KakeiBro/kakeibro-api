@@ -1,0 +1,5 @@
+# Set the default behavior for all files
+* text=auto
+
+# Force specific line endings for certain file types
+*.cs text eol=lf
