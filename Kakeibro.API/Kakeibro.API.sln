@@ -18,6 +18,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\pull-request.yml = ..\.github\workflows\pull-request.yml
 		..\.github\workflows\master-push.yml = ..\.github\workflows\master-push.yml
+		..\.github\workflows\cleanup-image-registry.yml = ..\.github\workflows\cleanup-image-registry.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{B1272177-809A-49CF-AC7F-89D78A844E3C}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\scripts\image-cleanup.sh = ..\.github\scripts\image-cleanup.sh
 	EndProjectSection
 EndProject
 Global
@@ -28,6 +34,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{72C4AE2B-55F3-4E68-824F-3768FABC0BF1} = {CE207E1E-9D12-4D73-BE18-BDC2B05E50CF}
 		{967D580B-5482-4829-AED4-140562F2A3B9} = {E9478A3B-3C6C-4457-B89F-234CCD2C6B03}
+		{B1272177-809A-49CF-AC7F-89D78A844E3C} = {E9478A3B-3C6C-4457-B89F-234CCD2C6B03}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{72C4AE2B-55F3-4E68-824F-3768FABC0BF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

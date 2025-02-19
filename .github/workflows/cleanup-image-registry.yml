@@ -1,0 +1,38 @@
+name: CRON Job to Housekeep Google Artifact Registry
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+
+jobs:
+  connect-setup-and-run-script:
+    name: Connect and Setup Google Cloud
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Google Cloud authentication
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }} # JSON key for GCP service account
+
+      # Set up Google Cloud SDK
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      # Run the script from the .github/scripts folder
+      - name: Run custom script
+        env:
+          SERVICE_NAME: 'kakeibro-api' # Cloud Run service name
+          REGION: 'us-central1' # Cloud Run region (e.g., us-central1)
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
+          IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+
+        run: |
+          chmod +x .github/scripts/image-cleanup.sh
+          .github/scripts/image-cleanup.sh
