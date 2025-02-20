@@ -96,6 +96,7 @@ jobs:
           file: ./Kakeibro.API/src/KakeiBro.API/Dockerfile
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
+          provenance: false
 
   deploy-to-cloud-run:
     name: Deploy image to Cloud Run
