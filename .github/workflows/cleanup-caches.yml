@@ -24,15 +24,9 @@ jobs:
         run: |
           jq -c '[.[] | select(.key | startswith("Linux-buildx"))]' caches.json > buildx_caches.json
           jq -c '[.[] | select(.key | startswith("Linux-nuget"))]' caches.json > nuget_caches.json
-          
-          cat buildx_caches.json
-          cat nuget_caches.json
 
           latest_buildx_cache_id=$(jq -r '.[0].id' buildx_caches.json)
           latest_nuget_cache_id=$(jq -r '.[0].id' nuget_caches.json)
-
-          echo $latest_buildx_cache_id
-          echo $latest_nuget_cache_id
 
           jq -c '.[1:] | .[]' buildx_caches.json | while read -r cache; do
             cache_id=$(echo $cache | jq -r '.id')
