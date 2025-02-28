@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		..\.github\workflows\pull-request.yml = ..\.github\workflows\pull-request.yml
 		..\.github\workflows\master-push.yml = ..\.github\workflows\master-push.yml
 		..\.github\workflows\cleanup-image-registry.yml = ..\.github\workflows\cleanup-image-registry.yml
+		..\.github\workflows\cleanup-caches.yml = ..\.github\workflows\cleanup-caches.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{B1272177-809A-49CF-AC7F-89D78A844E3C}"
