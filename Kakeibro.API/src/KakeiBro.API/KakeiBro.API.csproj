@@ -12,7 +12,7 @@
         <PackageReference Include="Serilog.Enrichers.Thread"/>
         <PackageReference Include="Serilog.Sinks.Async"/>
 
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" VersionOverride="9.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" VersionOverride="9.0.2"/>
     </ItemGroup>
 
     <ItemGroup>
