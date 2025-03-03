@@ -4,11 +4,13 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+// Installing Modules
+builder.Services.InstallModulesFromAssemblies(
+    builder.Configuration,
+    Modules.Authentication.AssemblyReference.Assembly);
+
 // Logging
-builder.Host.UseSerilog((context, configuration) =>
-{
-    configuration.ReadFrom.Configuration(context.Configuration);
-});
+builder.Host.UseSerilog((context, configuration) => { configuration.ReadFrom.Configuration(context.Configuration); });
 
 WebApplication app = builder.Build();
 
@@ -19,6 +21,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Add Modules Routes
+app.InstallEndpointsFromAssemblies(
+    app.Configuration,
+    Modules.Authentication.AssemblyReference.Assembly);
 
 string[] summaries =
 [

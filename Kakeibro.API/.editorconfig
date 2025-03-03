@@ -96,5 +96,6 @@ dotnet_diagnostic.S3903.severity = none
 # NET.CodeAnalyzers (CA...)
 dotnet_diagnostic.CA2007.severity = none
 dotnet_diagnostic.CA5394.severity = none
+dotnet_diagnostic.CA1303.severity = none
 
 # Visual Studio.Analyzers (IDE...)

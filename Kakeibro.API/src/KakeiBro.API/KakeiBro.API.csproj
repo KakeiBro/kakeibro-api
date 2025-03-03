@@ -21,4 +21,9 @@
         </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Common\Common.Library\Common.Library.csproj" />
+      <ProjectReference Include="..\Modules\Modules.Authentication\Modules.Authentication.csproj" />
+    </ItemGroup>
+
 </Project>

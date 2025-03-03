@@ -6,6 +6,11 @@ Accept: application/json
 
 ###
 
+GET {{KakeiBro_API_HostAddress}}/auth/
+Accept: application/json
+
+###
+
 GET {{KakeiBro_API_DEMO_HostAddress}}/weatherforecast/
 Accept: application/json
 

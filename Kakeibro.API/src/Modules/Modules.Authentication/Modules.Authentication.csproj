@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\..\Common\Common.Library\Common.Library.csproj"/>
+    </ItemGroup>
+    
+    <!--Enabling ASP.NET Core abstraction access for modules-->
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+</Project>
