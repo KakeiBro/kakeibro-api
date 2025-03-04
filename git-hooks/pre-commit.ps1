@@ -13,31 +13,20 @@ dotnet test
 if ($LASTEXITCODE -ne 0) { exit 1 }
 
 Write-Host "Running Google OAuth credential sanitization..."
-# Function to format JSON using .NET
-function Format-Json {
-    param ([string]$jsonString)
-    $jsonObject = [System.Text.Json.JsonSerializer]::Deserialize($jsonString, [Object], [System.Text.Json.JsonSerializerOptions]@{ WriteIndented = $true })
-    return [System.Text.Json.JsonSerializer]::Serialize($jsonObject, [System.Text.Json.JsonSerializerOptions]@{ WriteIndented = $true })
+# Ensure jq is installed
+if (-not (Get-Command jq -ErrorAction SilentlyContinue)) {
+    Write-Host "Error: jq is not installed. Install it using 'choco install jq' (Windows)."
+    exit 1
 }
 
 $jsonFilePath = ".\src\KakeiBro.API\appsettings.json"
 $jsonBakFilePath = ".\src\KakeiBro.API\appsettings.bak.json"
 
-# Read the JSON file
-$jsonContent = Get-Content -Raw -Path $jsonFilePath | ConvertFrom-Json
-$restoreContent = Get-Content -Raw -Path $jsonFilePath | ConvertFrom-Json
+# Create a backup of the original JSON
+Copy-Item -Path $jsonFilePath -Destination $jsonBakFilePath -Force
 
-# Ensure sensitive credentials are set to an empty string
-$jsonContent.GoogleAuth.ClientId = ""
-$jsonContent.GoogleAuth.RedirectUri = ""
-$jsonContent.GoogleAuth.JavascriptOrigin = ""
-
-# Format JSON using .NET
-$jsonContent = Format-Json -jsonString $jsonContent
-$restoreContent = Format-Json -jsonString $restoreContent
-
-$jsonContent | ConvertTo-Json -Depth 10 | Set-Content -Path $jsonFilePath -Encoding UTF8
-$restoreContent | ConvertTo-Json -Depth 10 | Set-Content -Path $jsonBakFilePath -Encoding UTF8
+# Use jq to modify the JSON and format it
+jq '(.GoogleAuth.ClientId, .GoogleAuth.RedirectUri, .GoogleAuth.JavascriptOrigin) |= ""' $jsonFilePath | Out-File -Encoding UTF8 $jsonFilePath
 
 git add $jsonFilePath
 
