@@ -26,9 +26,12 @@ $jsonBakFilePath = ".\src\KakeiBro.API\appsettings.bak.json"
 # Create a backup of the original JSON
 Copy-Item -Path $jsonFilePath -Destination $jsonBakFilePath -Force
 
+# Read entire file first to avoid truncation on same pipeline command
+$jsonContent = Get-Content -Path $jsonFilePath -Raw
+
 # Use jq to modify the JSON and format it
 $jqFilter = '(.GoogleAuth.ClientId, .GoogleAuth.RedirectUri, .GoogleAuth.JavascriptOrigin) |= """"' # PW doesn't like ", you have to escape it by adding double ""
-jq $jqFilter $jsonFilePath | Out-File -Encoding utf8 $jsonFilePath
+$jsonContent | jq $jqFilter | Out-File -Encoding utf8 $jsonFilePath
 
 # Stage the modified file in Git
 git add $jsonFilePath
