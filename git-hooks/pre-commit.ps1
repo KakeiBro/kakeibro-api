@@ -21,7 +21,7 @@ if (-not (Get-Command jq -ErrorAction SilentlyContinue)) {
 }
 
 $jsonFilePath = ".\src\KakeiBro.API\appsettings.json"
-$jsonBakFilePath = '.\src\KakeiBro.API\appsettings.bak.json'
+$jsonBakFilePath = ".\src\KakeiBro.API\appsettings.bak.json"
 
 # Create a backup of the original JSON
 Copy-Item -Path $jsonFilePath -Destination $jsonBakFilePath -Force
