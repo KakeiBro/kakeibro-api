@@ -1,6 +1,6 @@
 Set-Location .\Kakeibro.API
 
-Write-Host "Running workstation appsettings restore..."
+Write-Host "Running appsettings backup restoration..."
 
 $jsonFilePath = ".\src\KakeiBro.API\appsettings.json"
 $jsonBakFilePath = ".\src\KakeiBro.API\appsettings.bak.json"
