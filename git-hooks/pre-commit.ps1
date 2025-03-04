@@ -26,7 +26,8 @@ $jsonBakFilePath = ".\src\KakeiBro.API\appsettings.bak.json"
 Copy-Item -Path $jsonFilePath -Destination $jsonBakFilePath -Force
 
 # Use jq to modify the JSON and format it
-jq '(.GoogleAuth.ClientId, .GoogleAuth.RedirectUri, .GoogleAuth.JavascriptOrigin) |= ""' $jsonFilePath | Out-File -Encoding UTF8 $jsonFilePath
+$jqFilter = '(.GoogleAuth.ClientId,.GoogleAuth.RedirectUri,.GoogleAuth.JavascriptOrigin) |= ""'
+jq "$jqFilter" "$jsonFilePath" | Out-File -Encoding utf8 "$jsonFilePath"
 
 git add $jsonFilePath
 
