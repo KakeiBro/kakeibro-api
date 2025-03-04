@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Detect OS
+OS=$(uname -s 2>/dev/null || echo "Windows")
+
+case "$OS" in
+    Linux|Darwin)
+        echo "Running Bash post-commit hook..."
+        exec "$PWD/.git/hooks/post-commit.sh"
+        ;;
+    Windows|MINGW*|CYGWIN*|MSYS*)
+        echo "Running PowerShell post-commit hook..."
+        exec powershell -File "$PWD/.git/hooks/post-commit.ps1"
+        ;;
+    *)
+        echo "Unknown OS: $OS"
+        exit 1
+        ;;
+esac

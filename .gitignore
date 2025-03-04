@@ -66,3 +66,7 @@ _TestResults/
 # Sensitive Files
 
 client_secrets.json
+
+# Automation files
+
+appsettings.bak.json
