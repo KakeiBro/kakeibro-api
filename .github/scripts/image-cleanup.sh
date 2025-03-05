@@ -37,7 +37,7 @@ if [ ${#IMAGE_ARRAY[@]} -gt 3 ]; then
       --force-delete-tags
   done
 else
-  echo "Only ${#TAGS_ARRAY[@]} tags found. No cleanup needed."
+  echo "Only ${#IMAGE_ARRAY[@]} tags found. No cleanup needed."
 fi
 
 echo "Cleanup complete!"
