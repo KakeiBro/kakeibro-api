@@ -22,12 +22,12 @@ IMAGES=$(gcloud artifacts docker images list $REPOSITORY_NAME \
 # Convert the list of digests into an array
 IMAGE_ARRAY=($IMAGES)
 
-# Check if there are more than 3 images
-if [ ${#IMAGE_ARRAY[@]} -gt 3 ]; then
-  echo "Found ${#IMAGE_ARRAY[@]} images. Keeping the 3 most recent ones and deleting the rest..."
+# Check if there are more than 2 images
+if [ ${#IMAGE_ARRAY[@]} -gt 2 ]; then
+  echo "Found ${#IMAGE_ARRAY[@]} images. Keeping the 2 most recent ones and deleting the rest..."
 
-  # Loop through the tags, skipping the first 3 (most recent)
-  for ((i=3; i<${#IMAGE_ARRAY[@]}; i++)); do
+  # Loop through the tags, skipping the first 2 (most recent)
+  for ((i=2; i<${#IMAGE_ARRAY[@]}; i++)); do
     DIGEST=${IMAGE_ARRAY[$i]}
     echo "Deleting image: $DIGEST"
     gcloud artifacts docker images delete "$REPOSITORY_NAME@$DIGEST" \
