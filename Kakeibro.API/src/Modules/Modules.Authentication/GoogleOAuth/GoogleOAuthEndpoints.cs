@@ -12,7 +12,7 @@ public class GoogleOAuthEndpoints : IEndpointDefinition
         app.MapGet("/auth", (IGoogleOAuthRepository repository) =>
         {
             repository.GenerateGoogleOAuthToken(string.Empty, string.Empty);
-            Results.Ok(new
+            return Results.Ok(new
             {
                 Message = "Yes, I am Google Auth",
             });
