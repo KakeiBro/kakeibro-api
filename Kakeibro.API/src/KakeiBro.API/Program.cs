@@ -4,10 +4,10 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // API Configurations
 builder.Services.AddOpenApi();
-builder.Services.AddApiVersioning(options =>
+builder.Services
+    .AddApiVersioning(options =>
     {
         options.DefaultApiVersion = new ApiVersion(1);
-        options.ReportApiVersions = true;
         options.ApiVersionReader = new UrlSegmentApiVersionReader();
     })
     .AddApiExplorer(options =>
@@ -42,7 +42,9 @@ ApiVersionSet apiVersionSet = app
     .HasApiVersion(new ApiVersion(1))
     .ReportApiVersions()
     .Build();
-RouteGroupBuilder groupBuilder = app.MapGroup("api/v{apiVersion:apiVersion}").WithApiVersionSet(apiVersionSet);
+RouteGroupBuilder groupBuilder = app
+    .MapGroup("api/v{apiVersion:apiVersion}")
+    .WithApiVersionSet(apiVersionSet);
 
 // Add Modules Routes
 groupBuilder.InstallEndpointsFromAssemblies(
