@@ -5,6 +5,7 @@
         <DockerfileContext>..\..</DockerfileContext>
     </PropertyGroup>
     <ItemGroup>
+        <!--Cross-Cutting Concerns-->
         <PackageReference Include="SonarAnalyzer.CSharp"/>
         <PackageReference Include="StyleCop.Analyzers"/>
         <PackageReference Include="Serilog.AspNetCore"/>
@@ -12,7 +13,10 @@
         <PackageReference Include="Serilog.Enrichers.Thread"/>
         <PackageReference Include="Serilog.Sinks.Async"/>
 
+        <!--API Versioning plus auto documentation-->
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" VersionOverride="9.0.2"/>
+        <PackageReference Include="Asp.Versioning.Http"/>
+        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer"/>
     </ItemGroup>
 
     <ItemGroup>

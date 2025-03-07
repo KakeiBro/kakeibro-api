@@ -1,8 +1,20 @@
+using Asp.Versioning.Builder;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+// API Configurations
 builder.Services.AddOpenApi();
+builder.Services.AddApiVersioning(options =>
+    {
+        options.DefaultApiVersion = new ApiVersion(1);
+        options.ReportApiVersions = true;
+        options.ApiVersionReader = new UrlSegmentApiVersionReader();
+    })
+    .AddApiExplorer(options =>
+    {
+        options.GroupNameFormat = "'v'V";
+        options.SubstituteApiVersionInUrl = true;
+    });
 
 // Installing Modules
 builder.Services.InstallModulesFromAssemblies(
@@ -10,7 +22,10 @@ builder.Services.InstallModulesFromAssemblies(
     Modules.Authentication.AssemblyReference.Assembly);
 
 // Logging
-builder.Host.UseSerilog((context, configuration) => { configuration.ReadFrom.Configuration(context.Configuration); });
+builder.Host.UseSerilog((context, configuration) =>
+{
+    configuration.ReadFrom.Configuration(context.Configuration);
+});
 
 WebApplication app = builder.Build();
 
@@ -22,8 +37,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+ApiVersionSet apiVersionSet = app
+    .NewApiVersionSet()
+    .HasApiVersion(new ApiVersion(1))
+    .ReportApiVersions()
+    .Build();
+RouteGroupBuilder groupBuilder = app.MapGroup("api/v{apiVersion:apiVersion}").WithApiVersionSet(apiVersionSet);
+
 // Add Modules Routes
-app.InstallEndpointsFromAssemblies(
+groupBuilder.InstallEndpointsFromAssemblies(
     app.Configuration,
     Modules.Authentication.AssemblyReference.Assembly);
 
@@ -32,7 +54,7 @@ string[] summaries =
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 ];
 
-app.MapGet("/weatherforecast", () =>
+groupBuilder.MapGet("/weatherforecast", () =>
     {
         WeatherForecast[] forecast = Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecast(
@@ -43,8 +65,6 @@ app.MapGet("/weatherforecast", () =>
         return forecast;
     })
     .WithName("GetWeatherForecast");
-
-app.MapGet("test", () => Results.Ok());
 
 await app.RunAsync();
 
