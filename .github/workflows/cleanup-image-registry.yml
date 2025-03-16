@@ -33,6 +33,7 @@ jobs:
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
           REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
           IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+          ARTIFACT_REGISTRY: ${{ secrets.ARTIFACT_REGISTRY }}
 
         run: |
           chmod +x .github/scripts/image-cleanup.sh

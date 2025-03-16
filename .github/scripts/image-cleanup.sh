@@ -13,11 +13,11 @@ gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
 # Get the list of tags for the specified package, sorted by creation time in descending order
 echo "Fetching images from repository..."
-IMAGES=$(gcloud artifacts docker images list $REPOSITORY_NAME \
+FULL_NAME = "$ARTIFACT_REGISTRY/$PROJECT_ID/$REPOSITORY_NAME/$IMAGE_NAME"
+IMAGES=$(gcloud artifacts docker images list $FULL_NAME \
   --project=$PROJECT_ID \
-  --location=$REGION \
   --format="value(DIGEST)" \
-  --sort-by="~CREATE_TIME")
+  --sort-by="~CREATE_TIME") | tail -n 3
 
 # Convert the list of digests into an array
 IMAGE_ARRAY=($IMAGES)
@@ -30,9 +30,8 @@ if [ ${#IMAGE_ARRAY[@]} -gt 2 ]; then
   for ((i=2; i<${#IMAGE_ARRAY[@]}; i++)); do
     DIGEST=${IMAGE_ARRAY[$i]}
     echo "Deleting image: $DIGEST"
-    gcloud artifacts docker images delete "$REPOSITORY_NAME@$DIGEST" \
+    gcloud artifacts docker images delete "$FULL_NAME@$DIGEST" \
       --project=$PROJECT_ID \
-      --location=$REGION \
       --quiet \
       --force-delete-tags
   done
