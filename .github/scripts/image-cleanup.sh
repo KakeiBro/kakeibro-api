@@ -17,7 +17,7 @@ FULL_NAME="$ARTIFACT_REGISTRY/$PROJECT_ID/$REPOSITORY_NAME/$IMAGE_NAME"
 IMAGES=$(gcloud artifacts docker images list $FULL_NAME \
   --project=$PROJECT_ID \
   --format="value(DIGEST)" \
-  --sort-by="~CREATE_TIME") | tail -n 3
+  --sort-by="~CREATE_TIME")
 
 # Convert the list of digests into an array
 IMAGE_ARRAY=($IMAGES)
