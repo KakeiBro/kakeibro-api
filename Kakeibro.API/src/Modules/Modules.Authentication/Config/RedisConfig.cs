@@ -13,4 +13,6 @@ public class RedisConfig
     public bool ForceMigration { get; set; }
 
     public bool Seed { get; set; }
+
+    public bool RedisOff { get; set; }
 }
