@@ -13,7 +13,7 @@ gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
 # Get the list of tags for the specified package, sorted by creation time in descending order
 echo "Fetching images from repository..."
-FULL_NAME = "$ARTIFACT_REGISTRY/$PROJECT_ID/$REPOSITORY_NAME/$IMAGE_NAME"
+FULL_NAME="$ARTIFACT_REGISTRY/$PROJECT_ID/$REPOSITORY_NAME/$IMAGE_NAME"
 IMAGES=$(gcloud artifacts docker images list $FULL_NAME \
   --project=$PROJECT_ID \
   --format="value(DIGEST)" \
