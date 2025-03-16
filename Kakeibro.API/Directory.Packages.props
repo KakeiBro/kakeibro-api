@@ -3,13 +3,24 @@
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     </PropertyGroup>
     <ItemGroup>
+        <!--Cross Cutting Concerns-->
         <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.7.0.110445"/>
         <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556"/>
         <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0"/>
         <PackageVersion Include="Serilog.Sinks.Async" Version="2.1.0"/>
         <PackageVersion Include="Serilog.Enrichers.Environment" Version="3.0.1"/>
         <PackageVersion Include="Serilog.Enrichers.Thread" Version="4.0.0"/>
+
+        <!--API Versioning-->
         <PackageVersion Include="Asp.Versioning.Http" Version="8.1.0"/>
         <PackageVersion Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0"/>
+
+        <!--Redis-->
+        <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.2" />
+        <PackageVersion Include="Redis.OM" Version="0.7.6" />
+
+        <!--Faker-->
+        <PackageVersion Include="Bogus" Version="35.6.2"/>
+        <!--<PackageVersion Include="Bogus" Version="35.6.2" PrivateAssets="all"/> In case we don't need this in Prod-->
     </ItemGroup>
 </Project>

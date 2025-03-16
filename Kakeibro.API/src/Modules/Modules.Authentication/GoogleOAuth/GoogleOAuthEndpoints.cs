@@ -14,6 +14,7 @@ public class GoogleOAuthEndpoints : IEndpointDefinition
         app.MapGet("/auth", (IGoogleOAuthRepository repository, IOptions<OAuthConfig> config) =>
         {
             repository.GenerateGoogleOAuthToken(string.Empty, string.Empty);
+
             return Results.Ok(config.Value);
         });
     }

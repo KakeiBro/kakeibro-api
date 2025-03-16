@@ -2,9 +2,26 @@
     <ItemGroup>
         <ProjectReference Include="..\..\Common\Common.Library\Common.Library.csproj"/>
     </ItemGroup>
-    
+
     <!--Enabling ASP.NET Core abstraction access for modules-->
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+    <!--NuGet references-->
+    <ItemGroup>
+        <!--Cross-Cutting Concerns-->
+        <PackageReference Include="SonarAnalyzer.CSharp"/>
+        <PackageReference Include="StyleCop.Analyzers"/>
+        <PackageReference Include="Serilog.AspNetCore"/>
+        <PackageReference Include="Serilog.Enrichers.Environment"/>
+        <PackageReference Include="Serilog.Enrichers.Thread"/>
+        <PackageReference Include="Serilog.Sinks.Async"/>
+
+        <!--Redis Dependencies-->
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis"/>
+        <PackageReference Include="Redis.OM"/>
+
+        <!--Faker-->
+        <PackageReference Include="Bogus"/>
     </ItemGroup>
 </Project>
