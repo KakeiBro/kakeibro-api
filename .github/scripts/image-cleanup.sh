@@ -33,7 +33,7 @@ if [ ${#IMAGE_ARRAY[@]} -gt 2 ]; then
     gcloud artifacts docker images delete "$FULL_NAME@$DIGEST" \
       --project=$PROJECT_ID \
       --quiet \
-      --force-delete-tags
+      --delete-tags
   done
 else
   echo "Only ${#IMAGE_ARRAY[@]} tags found. No cleanup needed."
