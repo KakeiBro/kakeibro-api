@@ -118,8 +118,12 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |
+          echo "Redis__RedisOff=${{ secrets.REDIS_OFF }}" >> .env &&
           gcloud run deploy ${{ env.SERVICE_NAME }} \
             --image=${{ secrets.ARTIFACT_REGISTRY }}/${{ secrets.PROJECT_ID }}/${{ secrets.REPOSITORY_NAME }}/${{ secrets.IMAGE_NAME }}:latest \
             --platform=managed \
+            --env-vars-file=.env \
             --region=${{ env.REGION }} \
-            --allow-unauthenticated
+            --allow-unauthenticated &&
+          rm .env
+          
