@@ -16,5 +16,8 @@ public class Token
     public string Vendor { get; set; } = string.Empty;
 
     [Indexed]
+    public long GracePeriod { get; set; }
+
+    [Indexed]
     public bool Deleted { get; set; }
 }

@@ -70,6 +70,7 @@ public class RedisMigrator(
             .RuleFor(x => x.TokenId, (f, _) => f.IndexFaker + 1)
             .RuleFor(x => x.Value, (f, _) => f.System.ApplePushToken())
             .RuleFor(x => x.Vendor, (f, _) => f.Company.CompanyName())
+            .RuleFor(x => x.GracePeriod, (f, _) => (long)(f.Date.Soon() - DateTime.UnixEpoch).TotalSeconds)
             .RuleFor(x => x.Deleted, _ => false);
 
         Faker<MfaDevice>? mfaDevices = new Faker<MfaDevice>()

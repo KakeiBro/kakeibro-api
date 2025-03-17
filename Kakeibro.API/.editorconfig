@@ -96,6 +96,7 @@ dotnet_diagnostic.SA1633.severity = none
 dotnet_diagnostic.SA0001.severity = none
 dotnet_diagnostic.SA1200.severity = none
 dotnet_diagnostic.SA1309.severity = none
+dotnet_diagnostic.SA1402.severity = none
 
 # SonarAnalyzers.CSharp (S...)
 dotnet_diagnostic.S3903.severity = none
@@ -108,5 +109,6 @@ dotnet_diagnostic.CA1054.severity = none
 dotnet_diagnostic.CA1056.severity = none
 dotnet_diagnostic.CA1062.severity = none
 dotnet_diagnostic.CA1848.severity = none
+dotnet_diagnostic.CA1034.severity = none
 
 # Visual Studio.Analyzers (IDE...)
