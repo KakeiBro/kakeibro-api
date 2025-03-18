@@ -14,12 +14,16 @@ public class GoogleOAuthEndpoints : IEndpointDefinition
     public void RegisterEndpoints(IEndpointRouteBuilder app)
     {
         app.MapGet(
-            "/auth-uri",
-            async (IGoogleOAuthRepository repository, IOptions<OAuthConfig> config, CancellationToken token) =>
+            "/auth/o-auth-uri/",
+            async (IGoogleOAuthRepository repository, CancellationToken token) =>
             {
                 Uri response = await repository.GenerateOAuthUriAsync(token);
 
                 return Results.Ok(new OAuthUriResponse(response.AbsoluteUri));
             });
+
+        app.MapPost("/auth/register", () => { });
+
+        app.MapPost("/auth/login", () => { });
     }
 }

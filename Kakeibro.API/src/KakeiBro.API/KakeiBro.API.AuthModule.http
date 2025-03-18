@@ -1,7 +1,7 @@
 @KakeiBro_API_HostAddress = http://localhost:5214
 @KakeiBro_API_DEMO_HostAddress = https://kakeibro-api.dsbalderrama.top
 
-GET {{KakeiBro_API_HostAddress}}/api/v1/auth-uri/
+GET {{KakeiBro_API_HostAddress}}/api/v1/auth/o-auth-uri/
 Accept: application/json
 
 ###

@@ -1,5 +1,19 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+// CORS Configuration
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(
+            "AllowAll",
+            policy => policy
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+    });
+}
+
 // API Configurations
 builder.Services.AddOpenApi();
 builder.Services
@@ -20,10 +34,7 @@ builder.Services.InstallModulesFromAssemblies(
     Modules.Authentication.AssemblyReference.Assembly);
 
 // Logging
-builder.Host.UseSerilog((context, configuration) =>
-{
-    configuration.ReadFrom.Configuration(context.Configuration);
-});
+builder.Host.UseSerilog((context, configuration) => { configuration.ReadFrom.Configuration(context.Configuration); });
 
 WebApplication app = builder.Build();
 
@@ -48,6 +59,12 @@ RouteGroupBuilder groupBuilder = app
 groupBuilder.InstallEndpointsFromAssemblies(
     app.Configuration,
     Modules.Authentication.AssemblyReference.Assembly);
+
+// CORS configuration
+if (builder.Environment.IsDevelopment())
+{
+    app.UseCors("AllowAll");
+}
 
 string[] summaries =
 [
