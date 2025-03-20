@@ -2,8 +2,6 @@ using Common.Library.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Options;
-using Modules.Authentication.Config;
 
 namespace Modules.Authentication.GoogleOAuth;
 
@@ -22,7 +20,7 @@ public class GoogleOAuthEndpoints : IEndpointDefinition
                 return Results.Ok(new OAuthUriResponse(response.AbsoluteUri));
             });
 
-        app.MapPost("/auth/register", () => { });
+        app.MapPost("/auth/o-auth-code", (string code) => Results.Ok(new { Message = "Hello People", Code = code }));
 
         app.MapPost("/auth/login", () => { });
     }

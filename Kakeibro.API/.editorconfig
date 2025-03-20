@@ -111,4 +111,8 @@ dotnet_diagnostic.CA1062.severity = none
 dotnet_diagnostic.CA1848.severity = none
 dotnet_diagnostic.CA1034.severity = none
 
-# Visual Studio.Analyzers (IDE...)
+# Visual Studio.Analyzers (IDE..., CS...)
+dotnet_diagnostic.CS8019.severity = error
+
+# Rider Analyzers
+resharper_redundant_using_directive_highlighting=error
