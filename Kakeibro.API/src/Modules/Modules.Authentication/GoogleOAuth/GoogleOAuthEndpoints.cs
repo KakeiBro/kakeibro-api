@@ -20,7 +20,10 @@ public class GoogleOAuthEndpoints : IEndpointDefinition
                 return Results.Ok(new OAuthUriResponse(response.AbsoluteUri));
             });
 
-        app.MapPost("/auth/o-auth-code", (string code) => Results.Ok(new { Message = "Hello People", Code = code }));
+        app.MapPost(
+            "/auth/o-auth-code",
+            (string code, IGoogleOAuthRepository repository) =>
+                repository.GenerateGoogleOAuthTokenAsync(code));
 
         app.MapPost("/auth/login", () => { });
     }

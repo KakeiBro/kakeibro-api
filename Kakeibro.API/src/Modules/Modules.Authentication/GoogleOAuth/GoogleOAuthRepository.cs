@@ -1,5 +1,8 @@
+using Common.Library.Utils;
 using Microsoft.Extensions.Options;
 using Modules.Authentication.Config;
+using QueryParams = Modules.Authentication.GoogleOAuth.Constants.OAuthQueryParams;
+using QueryValues = Modules.Authentication.GoogleOAuth.Constants.OAuthQueryParamValues;
 
 namespace Modules.Authentication.GoogleOAuth;
 
@@ -7,7 +10,7 @@ public interface IGoogleOAuthRepository
 {
     Task<Uri> GenerateOAuthUriAsync(CancellationToken token);
 
-    void GenerateGoogleOAuthToken(string clientId, string clientSecret);
+    Task<string> GenerateGoogleOAuthTokenAsync(string code);
 }
 
 public class GoogleOAuthRepository(IOptions<OAuthConfig> config) : IGoogleOAuthRepository
@@ -15,12 +18,12 @@ public class GoogleOAuthRepository(IOptions<OAuthConfig> config) : IGoogleOAuthR
     public async Task<Uri> GenerateOAuthUriAsync(CancellationToken token)
     {
         using var queryParameters = new FormUrlEncodedContent([
-            new KeyValuePair<string, string>(Constants.OAuthQueryParams.ClientId, config.Value.ClientId!),
-            new KeyValuePair<string, string>(Constants.OAuthQueryParams.RedirectUri, config.Value.RedirectUri!),
-            new KeyValuePair<string, string>(Constants.OAuthQueryParams.ResponseType, Constants.OAuthQueryParamValues.ResponseType),
-            new KeyValuePair<string, string>(Constants.OAuthQueryParams.Scope, Constants.OAuthQueryParamValues.Scope),
-            new KeyValuePair<string, string>(Constants.OAuthQueryParams.AccessType, Constants.OAuthQueryParamValues.AccessType),
-            new KeyValuePair<string, string>(Constants.OAuthQueryParams.Prompt, Constants.OAuthQueryParamValues.Prompt),
+            new KeyValuePair<string, string>(QueryParams.ClientId, config.Value.ClientId!),
+            new KeyValuePair<string, string>(QueryParams.RedirectUri, config.Value.RedirectUri!),
+            new KeyValuePair<string, string>(QueryParams.ResponseType, QueryValues.ResponseType),
+            new KeyValuePair<string, string>(QueryParams.Scope, QueryValues.Scope),
+            new KeyValuePair<string, string>(QueryParams.AccessType, QueryValues.AccessType),
+            new KeyValuePair<string, string>(QueryParams.Prompt, QueryValues.Prompt),
         ]);
 
         string queryString = await queryParameters.ReadAsStringAsync(token);
@@ -32,8 +35,19 @@ public class GoogleOAuthRepository(IOptions<OAuthConfig> config) : IGoogleOAuthR
         return uriBuilder.Uri;
     }
 
-    public void GenerateGoogleOAuthToken(string clientId, string clientSecret)
+    public async Task<string> GenerateGoogleOAuthTokenAsync(string code)
     {
-        Console.WriteLine("Generating Google OAuth Token...");
+        HttpResponseMessage response = await HttpUtilities.SendRequestWithQueryParamsAsync(
+            config.Value.TokenEndpoint!,
+            [
+                new KeyValuePair<string, string>(QueryParams.Code, code),
+                new KeyValuePair<string, string>(QueryParams.ClientId, config.Value.ClientId!),
+                new KeyValuePair<string, string>(QueryParams.ClientSecret, config.Value.ClientSecret!),
+                new KeyValuePair<string, string>(QueryParams.RedirectUri, config.Value.RedirectUri!),
+                new KeyValuePair<string, string>(QueryParams.GrantType, QueryValues.AuthorizationCode),
+            ],
+            HttpMethod.Post);
+
+        return await response.Content.ReadAsStringAsync();
     }
 }

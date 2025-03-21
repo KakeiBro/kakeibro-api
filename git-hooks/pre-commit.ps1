@@ -30,7 +30,7 @@ Copy-Item -Path $jsonFilePath -Destination $jsonBakFilePath -Force
 $jsonContent = Get-Content -Path $jsonFilePath -Raw
 
 # Use jq to modify the JSON and format it
-$jqFilter = '(.GoogleAuth.ClientId, .GoogleAuth.RedirectUri, .GoogleAuth.JavascriptOrigin) |= """"' # PW doesn't like ", you have to escape it by adding double ""
+$jqFilter = '(.GoogleAuth.ClientId, .GoogleAuth.RedirectUri, .GoogleAuth.JavascriptOrigin, .GoogleAuth.ClientSecret) |= """"' # PW doesn't like ", you have to escape it by adding double ""
 $jsonContent | jq $jqFilter | Out-File -Encoding utf8 $jsonFilePath
 
 # Stage the modified file in Git

@@ -35,6 +35,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{1CFC32
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Library", "src\Common\Common.Library\Common.Library.csproj", "{4FF32659-100F-4C10-8117-31CBD67B9352}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git-hooks", "git-hooks", "{EB83F880-A552-4178-B35F-415332CF7400}"
+	ProjectSection(SolutionItems) = preProject
+		..\git-hooks\post-commit = ..\git-hooks\post-commit
+		..\git-hooks\post-commit.ps1 = ..\git-hooks\post-commit.ps1
+		..\git-hooks\post-commit.sh = ..\git-hooks\post-commit.sh
+		..\git-hooks\pre-commit = ..\git-hooks\pre-commit
+		..\git-hooks\pre-commit.ps1 = ..\git-hooks\pre-commit.ps1
+		..\git-hooks\pre-commit.sh = ..\git-hooks\pre-commit.sh
+		..\git-hooks\pre-push = ..\git-hooks\pre-push
+		..\git-hooks\pre-push.ps1 = ..\git-hooks\pre-push.ps1
+		..\git-hooks\pre-push.sh = ..\git-hooks\pre-push.sh
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Authentication.Tests", "test\Modules.Authentication.Tests\Modules.Authentication.Tests.csproj", "{8F807F77-5074-46F6-B6C3-320472775C69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Library.Tests", "test\Common.Library.Tests\Common.Library.Tests.csproj", "{E2A50D73-9E6A-43F4-892E-A5E1F9FDAAAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +65,9 @@ Global
 		{F9D88C6F-286F-4DB6-B445-4CEADBB5B248} = {A02BECD9-AB71-4977-8DB4-868D121ACC91}
 		{1CFC32E7-3763-432C-A236-1A3FE7BA0E5C} = {CE207E1E-9D12-4D73-BE18-BDC2B05E50CF}
 		{4FF32659-100F-4C10-8117-31CBD67B9352} = {1CFC32E7-3763-432C-A236-1A3FE7BA0E5C}
+		{EB83F880-A552-4178-B35F-415332CF7400} = {E9478A3B-3C6C-4457-B89F-234CCD2C6B03}
+		{8F807F77-5074-46F6-B6C3-320472775C69} = {BDA60891-07C0-4D28-A0E9-08E5A7F92C9B}
+		{E2A50D73-9E6A-43F4-892E-A5E1F9FDAAAD} = {BDA60891-07C0-4D28-A0E9-08E5A7F92C9B}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{72C4AE2B-55F3-4E68-824F-3768FABC0BF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -62,5 +82,13 @@ Global
 		{4FF32659-100F-4C10-8117-31CBD67B9352}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FF32659-100F-4C10-8117-31CBD67B9352}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FF32659-100F-4C10-8117-31CBD67B9352}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F807F77-5074-46F6-B6C3-320472775C69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F807F77-5074-46F6-B6C3-320472775C69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F807F77-5074-46F6-B6C3-320472775C69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F807F77-5074-46F6-B6C3-320472775C69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2A50D73-9E6A-43F4-892E-A5E1F9FDAAAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2A50D73-9E6A-43F4-892E-A5E1F9FDAAAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2A50D73-9E6A-43F4-892E-A5E1F9FDAAAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2A50D73-9E6A-43F4-892E-A5E1F9FDAAAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

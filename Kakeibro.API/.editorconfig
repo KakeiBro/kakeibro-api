@@ -100,6 +100,7 @@ dotnet_diagnostic.SA1402.severity = none
 
 # SonarAnalyzers.CSharp (S...)
 dotnet_diagnostic.S3903.severity = none
+dotnet_diagnostic.S4261.severity = error
 
 # NET.CodeAnalyzers (CA...)
 dotnet_diagnostic.CA2007.severity = none
@@ -115,4 +116,10 @@ dotnet_diagnostic.CA1034.severity = none
 dotnet_diagnostic.CS8019.severity = error
 
 # Rider Analyzers
-resharper_redundant_using_directive_highlighting=error
+resharper_redundant_using_directive_highlighting = error
+
+# Override settings for the Test project
+[test/**/*.cs]
+# Disable specific rules for test files
+dotnet_diagnostic.CA1707.severity = none
+dotnet_diagnostic.CA1515.severity = none
